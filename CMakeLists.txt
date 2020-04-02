@@ -1,6 +1,15 @@
 cmake_minimum_required(VERSION 3.15)
-project(tnm096_labs)
+
+project(Lab)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(tnm096_labs main.cpp)
+
+include_directories(
+	.
+	./
+)
+
+
+add_executable(Lab main.cpp Puzzle.cpp Puzzle.h)
+
