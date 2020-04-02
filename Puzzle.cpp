@@ -7,9 +7,10 @@ Puzzle::Puzzle(){
     std::vector<int> inValues{1,2,3,4,5,6,7,8,0};
 
     for(size_t i = 0; i < 9; i++) {
-        values.at(i) = inValues.at(i);
+        values.push_back(inValues.at(i));
         if (inValues.at(i) == 0) {
             zeroPos = i;
+           
         }
     }
     g_score = 0;
@@ -17,7 +18,7 @@ Puzzle::Puzzle(){
 
 Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
     for(size_t i = 0; i < 9; i++) {
-        values.at(i) = InBoard.at(i);
+        values.push_back(InBoard.at(i));
         if (InBoard.at(i) == 0) {
             zeroPos = i;
         }
@@ -49,9 +50,9 @@ int Puzzle::ManhattanDistance(){
 
         if(values.at(i) != 0){
             int col = i%3;
-            int row = floor(i/3);
+            int row = std::floor(i/3);
             int rightCol = values.at(i-1)%3;
-            int rightRow = floor(values.at(i-1)/3);
+            int rightRow = std::floor(values.at(i-1)/3);
 
            Dist += abs(row-rightRow)+abs(col-rightCol);
         }

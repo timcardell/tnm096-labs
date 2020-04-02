@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <vector>
+#include <cmath>
 #ifndef TNM096_LABS_PUZZLE_H
 #define TNM096_LABS_PUZZLE_H
 
@@ -10,7 +11,9 @@
 struct Puzzle {
 
     Puzzle();
+    virtual ~Puzzle(){
 
+    };
     Puzzle(std::vector<int>  Board, int gScore);
 
 

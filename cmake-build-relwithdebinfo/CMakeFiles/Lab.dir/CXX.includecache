@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/timcardell/Documents/tnm096-labs/Puzzle.cpp
+Puzzle.h
+/Users/timcardell/Documents/tnm096-labs/Puzzle.h
+
+/Users/timcardell/Documents/tnm096-labs/Puzzle.h
+iostream
+-
+vector
+-
+cmath
+-
+

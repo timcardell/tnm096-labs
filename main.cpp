@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+
 #include "Puzzle.h"
 
 int main() {
@@ -8,6 +9,8 @@ int main() {
 
     Puzzle newPuzzle;
     std::cout << "--: Begin puzzle :--" <<std::endl;
+
+    std::cout << newPuzzle.ManhattanDistance();
 
     return 0;
 }
