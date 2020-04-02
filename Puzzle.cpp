@@ -63,3 +63,38 @@ int Puzzle::ManhattanDistance(){
     return Dist;
 }
 
+std::vector<int> Puzzle::moves() {
+    std::vector<int> posMoves;
+    switch(zeroPos){
+        case 0:
+            posMoves = {1,3};
+            break;
+        case 1:
+            posMoves = {0,2,4};
+            break;
+        case 2:
+            posMoves = {1,5};
+            break;
+        case 3:
+            posMoves = {0,6,4};
+            break;
+        case 4:
+            posMoves = {1,3,5,7};
+            break;
+        case 5 :
+            posMoves = {2, 4, 8};
+        case 6:
+            posMoves = {3, 7};
+            break;
+        case 7:
+            posMoves = {4, 8};
+            break;
+        case 8 :
+            posMoves = {5, 7};
+        default:
+            break;
+
+
+    }
+    return posMoves;
+}

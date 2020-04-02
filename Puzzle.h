@@ -20,6 +20,7 @@ struct Puzzle {
     void A_Star();
 
     void Display();
+    std::vector<int> moves();
 
     int ManhattanDistance();
 
