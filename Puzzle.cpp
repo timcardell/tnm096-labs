@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{1,2,3,4,5,6,7,8,0};
+    std::vector<int> inValues{3,2,1,4,5,6,7,8,0};
 
     for(size_t i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -26,13 +26,16 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
     g_score = gScore;
 };
 
-void Puzzle::A_Star(){};
+void Puzzle::A_Star(){
+
+
+}
 
 void Puzzle::Display(){
     for(size_t i = 0; i < values.size(); i++){
         std::cout << values.at(i) <<std::endl;
     }
-};
+}
 
 int Puzzle::MisplacedTiles(std::vector<int> board){
     int counter = 0;
@@ -42,7 +45,7 @@ int Puzzle::MisplacedTiles(std::vector<int> board){
         }
     }
     return counter;
-};
+}
 
 int Puzzle::ManhattanDistance(){
     int Dist = 0;
@@ -51,12 +54,12 @@ int Puzzle::ManhattanDistance(){
         if(values.at(i) != 0){
             int col = i%3;
             int row = std::floor(i/3);
-            int rightCol = values.at(i-1)%3;
-            int rightRow = std::floor(values.at(i-1)/3);
+            int rightCol = (values[i]-1)%3;
+            int rightRow = std::floor(values[i]-1)/3;
 
            Dist += abs(row-rightRow)+abs(col-rightCol);
         }
     }
     return Dist;
-};
+}
 
