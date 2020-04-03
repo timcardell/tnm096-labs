@@ -9,10 +9,7 @@ int main() {
 
     Puzzle newPuzzle;
     std::cout << "--: Begin puzzle :--" <<std::endl;
-
-    newPuzzle.Display();
-    std::cout << newPuzzle.ManhattanDistance();
-
+    newPuzzle.A_Star();
     return 0;
 }
 

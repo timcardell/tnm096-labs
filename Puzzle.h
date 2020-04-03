@@ -16,6 +16,7 @@ struct Puzzle {
     };
     Puzzle(std::vector<int>  Board, int gScore);
 
+    Puzzle solve(std::vector<int> board,std::vector<int> move,int steps);
 
     void A_Star();
 

@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{3,2,1,4,5,6,7,8,0};
+    std::vector<int> inValues{3,2,1,4,0,6,7,8,5};
 
     for(size_t i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -13,6 +13,7 @@ Puzzle::Puzzle(){
            
         }
     }
+    h_score = MisplacedTiles(values);
     g_score = 0;
 }
 
@@ -28,8 +29,43 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
 
 void Puzzle::A_Star(){
 
+    int steps = 0;
+    Puzzle BestPuzzle;
+
+    while(h_score != 0){
+
+        std::vector<int> PosMoves = moves();
+
+        BestPuzzle = solve(values, PosMoves,steps);
+
+        steps++;
+       // Puzzle(DifferentBoards, MisplacedTiles(DifferentBoards));
+    }
+
 
 }
+
+Puzzle Puzzle::solve(std::vector<int> board, std::vector<int> moves, int gScore){
+
+    std::vector<Puzzle> DifferentBoards;
+    std::vector<int> tempValues = board;
+
+    //Create new Puzzles
+    for(size_t i = 0; i < moves.size(); i++){
+        std::swap(tempValues.at(i),tempValues.at(zeroPos));
+        DifferentBoards.at(i) = Puzzle(tempValues, gScore);
+    }
+
+    std::vector<int> fScore;
+    //CAlc f score
+    for(int i = 0; i < DifferentBoards.size(); i++){
+        fScore.at(i) = DifferentBoards.at(i).ManhattanDistance() + DifferentBoards.at(i).g_score;
+        std::cout << "Fscore: " << fScore.at(i) <<std::endl;
+    }
+    //Reuturn puzzle with least f score;
+    return DifferentBoards.at(0);
+}
+
 
 void Puzzle::Display(){
     for(size_t i = 0; i < values.size(); i++){
