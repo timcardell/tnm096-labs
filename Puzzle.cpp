@@ -4,13 +4,12 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{3,2,1,4,0,6,7,8,5};
+    std::vector<int> inValues{1,2,3,0,4,6,7,5,8};
 
     for(size_t i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
         if (inValues.at(i) == 0) {
             zeroPos = i;
-           
         }
     }
     h_score = MisplacedTiles(values);
@@ -24,53 +23,71 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
             zeroPos = i;
         }
     }
+    h_score = MisplacedTiles(values);
     g_score = gScore;
 };
 
-void Puzzle::A_Star(){
+Puzzle::Puzzle(Puzzle &inPuzzle){
+    std::swap(values,inPuzzle.values);
+    std::swap(zeroPos,inPuzzle.zeroPos);
+    std::swap(g_score,inPuzzle.g_score);
+    std::swap(h_score,inPuzzle.h_score);
+}
 
-    int steps = 0;
-    Puzzle BestPuzzle;
+Puzzle Puzzle::A_Star(){
+
+    int steps = 1;
+
 
     while(h_score != 0){
-
         std::vector<int> PosMoves = moves();
-
-        BestPuzzle = solve(values, PosMoves,steps);
-
+        Puzzle A(solve(values, PosMoves,steps)) ;
+        BestPuzzle = ;
         steps++;
-       // Puzzle(DifferentBoards, MisplacedTiles(DifferentBoards));
     }
-
-
+    return BestPuzzle;
 }
 
 Puzzle Puzzle::solve(std::vector<int> board, std::vector<int> moves, int gScore){
 
     std::vector<Puzzle> DifferentBoards ;
-    std::vector<int> tempValues = board;
 
     //Create new Puzzles
     for(size_t i = 0; i < moves.size(); i++){
-        std::swap(tempValues.at(i),tempValues.at(zeroPos));
+        std::vector<int> tempValues = board;
+        std::swap(tempValues.at(moves.at(i)),tempValues.at(zeroPos));
         DifferentBoards.push_back(Puzzle(tempValues, gScore));
     }
 
     std::vector<int> fScore;
     //CAlc f score
     for(int i = 0; i < DifferentBoards.size(); i++){
-        fScore.push_back(DifferentBoards.at(i).ManhattanDistance() + DifferentBoards.at(i).g_score);
-        std::cout << "Fscore: " << fScore.at(i) <<std::endl;
+        fScore.push_back(DifferentBoards.at(i).h_score + DifferentBoards.at(i).g_score);
+
     }
+
+    std::vector<int>::iterator it = std::find(fScore.begin(), fScore.end(), *std::min_element(fScore.begin(),fScore.end()));
+    int index = std::distance(fScore.begin(), it);
+
     //Reuturn puzzle with least f score;
-    return Puzzle();
+    std::cout << "FScore: "<< *std::min_element(fScore.begin(),fScore.end()) <<std::endl;
+    std::cout << "GScore: " << DifferentBoards.at(index).g_score <<", " << "HScore: " << DifferentBoards.at(index).h_score <<std::endl;
+    DifferentBoards.at(index).Display();
+    return DifferentBoards.at(index);
 }
 
 
 void Puzzle::Display(){
+    std::cout <<"After :" << g_score << " steps" <<std::endl;
     for(size_t i = 0; i < values.size(); i++){
-        std::cout << values.at(i) <<std::endl;
+
+        if((i+1)%3 == 0){
+            std::cout <<values.at(i)<< std::endl;
+        }
+        else
+            std::cout << values.at(i)  <<" | ";
     }
+    std::cout <<std::endl;
 }
 
 int Puzzle::MisplacedTiles(std::vector<int> board){
@@ -133,4 +150,12 @@ std::vector<int> Puzzle::moves() {
 
     }
     return posMoves;
+}
+
+Puzzle& Puzzle::operator= (Puzzle &inPuzzle){
+    std::swap(values,inPuzzle.values);
+    std::swap(zeroPos,inPuzzle.zeroPos);
+    std::swap(g_score,inPuzzle.g_score);
+    std::swap(h_score,inPuzzle.h_score);
+    return *this;
 }
