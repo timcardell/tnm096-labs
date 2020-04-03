@@ -27,25 +27,16 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
     g_score = gScore;
 };
 
-Puzzle::Puzzle(Puzzle &inPuzzle){
-    std::swap(values,inPuzzle.values);
-    std::swap(zeroPos,inPuzzle.zeroPos);
-    std::swap(g_score,inPuzzle.g_score);
-    std::swap(h_score,inPuzzle.h_score);
-}
-
 Puzzle Puzzle::A_Star(){
-
     int steps = 1;
-
 
     while(h_score != 0){
         std::vector<int> PosMoves = moves();
-        Puzzle A(solve(values, PosMoves,steps)) ;
-        BestPuzzle = ;
+        Puzzle WorkInProgressPuzzle = solve(values, PosMoves,steps) ;
+        *this =  WorkInProgressPuzzle;
         steps++;
     }
-    return BestPuzzle;
+    return *this;
 }
 
 Puzzle Puzzle::solve(std::vector<int> board, std::vector<int> moves, int gScore){
@@ -62,7 +53,7 @@ Puzzle Puzzle::solve(std::vector<int> board, std::vector<int> moves, int gScore)
     std::vector<int> fScore;
     //CAlc f score
     for(int i = 0; i < DifferentBoards.size(); i++){
-        fScore.push_back(DifferentBoards.at(i).h_score + DifferentBoards.at(i).g_score);
+        fScore.push_back(DifferentBoards.at(i).ManhattanDistance() + DifferentBoards.at(i).g_score);
 
     }
 

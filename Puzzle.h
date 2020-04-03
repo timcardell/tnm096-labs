@@ -13,7 +13,6 @@ struct Puzzle {
 
     Puzzle();
     Puzzle(std::vector<int>  Board, int gScore);
-    Puzzle(Puzzle &inPuzzle);
     virtual ~Puzzle(){};
 
     Puzzle solve(std::vector<int> board,std::vector<int> move,int steps);
