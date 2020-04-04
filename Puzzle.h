@@ -18,7 +18,7 @@ struct Puzzle {
     Puzzle(std::vector<int>  Board, int gScore);
     virtual ~Puzzle(){};
 
-    Puzzle solve(std::vector<int> board,std::vector<int> move,int steps, std::vector<std::vector<int>> OldBoards);
+    Puzzle solve(std::vector<int> move,int steps, std::vector<std::vector<int>> OldBoards);
 
     Puzzle A_Star();
 
