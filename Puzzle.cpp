@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{1,2,3,4,6,5,7,0,8};
+    std::vector<int> inValues{1,2,3,4,5,6,7,0,8};
 
     for(int i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -64,7 +64,7 @@ Puzzle Puzzle::solve( std::vector<int> moves, int gScore, std::vector<std::vecto
     }
 
     for(int i = 0; i < FilteredBoards.size(); i++){
-        fScore.push_back(FilteredBoards.at(i).ManhattanDistance() + FilteredBoards.at(i).g_score);
+        fScore.push_back(FilteredBoards.at(i).h_score + FilteredBoards.at(i).g_score);
     }
 
     std::vector<int>::iterator it = std::find(fScore.begin(), fScore.end(), *std::min_element(fScore.begin(),fScore.end()));
@@ -142,7 +142,7 @@ std::vector<int> Puzzle::moves() {
             posMoves = {3, 7};
             break;
         case 7:
-            posMoves = {4, 8};
+            posMoves = {6,4, 8};
             break;
         case 8 :
             posMoves = {5, 7};

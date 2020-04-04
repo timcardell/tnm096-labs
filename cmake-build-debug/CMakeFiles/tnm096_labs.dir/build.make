@@ -61,38 +61,38 @@ include CMakeFiles\tnm096_labs.dir\flags.make
 CMakeFiles\tnm096_labs.dir\main.cpp.obj: CMakeFiles\tnm096_labs.dir\flags.make
 CMakeFiles\tnm096_labs.dir\main.cpp.obj: ..\main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Tobias\Documents\GitHub\tnm096-labs\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/tnm096_labs.dir/main.cpp.obj"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\tnm096_labs.dir\main.cpp.obj /FdCMakeFiles\tnm096_labs.dir\ /FS -c C:\Users\Tobias\Documents\GitHub\tnm096-labs\main.cpp
 <<
 
 CMakeFiles\tnm096_labs.dir\main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tnm096_labs.dir/main.cpp.i"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe > CMakeFiles\tnm096_labs.dir\main.cpp.i @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe > CMakeFiles\tnm096_labs.dir\main.cpp.i @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Tobias\Documents\GitHub\tnm096-labs\main.cpp
 <<
 
 CMakeFiles\tnm096_labs.dir\main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tnm096_labs.dir/main.cpp.s"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\tnm096_labs.dir\main.cpp.s /c C:\Users\Tobias\Documents\GitHub\tnm096-labs\main.cpp
 <<
 
 CMakeFiles\tnm096_labs.dir\Puzzle.cpp.obj: CMakeFiles\tnm096_labs.dir\flags.make
 CMakeFiles\tnm096_labs.dir\Puzzle.cpp.obj: ..\Puzzle.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Tobias\Documents\GitHub\tnm096-labs\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/tnm096_labs.dir/Puzzle.cpp.obj"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\tnm096_labs.dir\Puzzle.cpp.obj /FdCMakeFiles\tnm096_labs.dir\ /FS -c C:\Users\Tobias\Documents\GitHub\tnm096-labs\Puzzle.cpp
 <<
 
 CMakeFiles\tnm096_labs.dir\Puzzle.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tnm096_labs.dir/Puzzle.cpp.i"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe > CMakeFiles\tnm096_labs.dir\Puzzle.cpp.i @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe > CMakeFiles\tnm096_labs.dir\Puzzle.cpp.i @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Tobias\Documents\GitHub\tnm096-labs\Puzzle.cpp
 <<
 
 CMakeFiles\tnm096_labs.dir\Puzzle.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tnm096_labs.dir/Puzzle.cpp.s"
-	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\cl.exe @<<
+	C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\cl.exe @<<
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\tnm096_labs.dir\Puzzle.cpp.s /c C:\Users\Tobias\Documents\GitHub\tnm096-labs\Puzzle.cpp
 <<
 
@@ -109,7 +109,7 @@ tnm096_labs.exe: CMakeFiles\tnm096_labs.dir\Puzzle.cpp.obj
 tnm096_labs.exe: CMakeFiles\tnm096_labs.dir\build.make
 tnm096_labs.exe: CMakeFiles\tnm096_labs.dir\objects1.rsp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Tobias\Documents\GitHub\tnm096-labs\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable tnm096_labs.exe"
-	"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\tnm096_labs.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1423~1.281\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\tnm096_labs.dir\objects1.rsp @<<
+	"C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\tnm096_labs.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x86\mt.exe --manifests  -- C:\PROGRA~2\MICROS~1\2019\COMMUN~1\VC\Tools\MSVC\1425~1.286\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\tnm096_labs.dir\objects1.rsp @<<
  /out:tnm096_labs.exe /implib:tnm096_labs.lib /pdb:C:\Users\Tobias\Documents\GitHub\tnm096-labs\cmake-build-debug\tnm096_labs.pdb /version:0.0  /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
