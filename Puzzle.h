@@ -37,7 +37,7 @@ struct Puzzle {
 
     int MisplacedTiles(std::vector<int> board) const;
 
-    Puzzle& operator= (Puzzle &inPuzzle);
+    Puzzle& operator= (Puzzle inPuzzle);
 
     //Variables
     std::vector<int> values;

@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Lab
+# Target rules for targets named tnm096_labs
 
 # Build rule for target.
-Lab: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Lab
-.PHONY : Lab
+tnm096_labs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tnm096_labs
+.PHONY : tnm096_labs
 
 # fast build rule for target.
-Lab/fast:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/build
-.PHONY : Lab/fast
+tnm096_labs/fast:
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/build
+.PHONY : tnm096_labs/fast
 
 Puzzle.o: Puzzle.cpp.o
 
@@ -129,7 +129,7 @@ Puzzle.o: Puzzle.cpp.o
 
 # target to build an object file
 Puzzle.cpp.o:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/Puzzle.cpp.o
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/Puzzle.cpp.o
 .PHONY : Puzzle.cpp.o
 
 Puzzle.i: Puzzle.cpp.i
@@ -138,7 +138,7 @@ Puzzle.i: Puzzle.cpp.i
 
 # target to preprocess a source file
 Puzzle.cpp.i:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/Puzzle.cpp.i
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/Puzzle.cpp.i
 .PHONY : Puzzle.cpp.i
 
 Puzzle.s: Puzzle.cpp.s
@@ -147,7 +147,7 @@ Puzzle.s: Puzzle.cpp.s
 
 # target to generate assembly for a file
 Puzzle.cpp.s:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/Puzzle.cpp.s
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/Puzzle.cpp.s
 .PHONY : Puzzle.cpp.s
 
 main.o: main.cpp.o
@@ -156,7 +156,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -165,7 +165,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,7 +174,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/Lab.dir/build.make CMakeFiles/Lab.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/tnm096_labs.dir/build.make CMakeFiles/tnm096_labs.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -185,7 +185,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... Lab"
+	@echo "... tnm096_labs"
 	@echo "... Puzzle.o"
 	@echo "... Puzzle.i"
 	@echo "... Puzzle.s"

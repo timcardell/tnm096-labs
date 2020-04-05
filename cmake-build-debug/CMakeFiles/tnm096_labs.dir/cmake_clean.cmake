@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/tnm096_labs.dir/Puzzle.cpp.obj"
-  "CMakeFiles/tnm096_labs.dir/main.cpp.obj"
-  "tnm096_labs.exe"
-  "tnm096_labs.exe.manifest"
-  "tnm096_labs.lib"
+  "CMakeFiles/tnm096_labs.dir/Puzzle.cpp.o"
+  "CMakeFiles/tnm096_labs.dir/main.cpp.o"
+  "tnm096_labs"
   "tnm096_labs.pdb"
 )
 

@@ -203,7 +203,7 @@ std::vector<int> Puzzle::moves() {
     return posMoves;
 }
 
-Puzzle& Puzzle::operator= ( Puzzle &inPuzzle){
+Puzzle& Puzzle::operator= ( Puzzle inPuzzle){
     std::swap(values,inPuzzle.values);
     std::swap(zeroPos,inPuzzle.zeroPos);
     std::swap(g_score,inPuzzle.g_score);

@@ -151,7 +151,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Lab
+CMAKE_PROJECT_NAME:STATIC=tnm096_labs
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib
@@ -220,6 +220,12 @@ Lab_SOURCE_DIR:STATIC=/Users/timcardell/Documents/tnm096-labs
 
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
+
+//Value Computed by CMake
+tnm096_labs_BINARY_DIR:STATIC=/Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo
+
+//Value Computed by CMake
+tnm096_labs_SOURCE_DIR:STATIC=/Users/timcardell/Documents/tnm096-labs
 
 
 ########################
