@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{1,2,3,4,5,6,7,0,8};
+    std::vector<int> inValues{1,2,3,0,4,6,7,5,8};
 
     for(int i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -14,6 +14,15 @@ Puzzle::Puzzle(){
     }
     h_score = MisplacedTiles(values);
     g_score = 0;
+    solvable = true;
+}
+
+void Puzzle::Shuffle(){
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle ( values.begin(), values.end(),g );
+    solvable = this->Solvable();
 }
 
 Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
@@ -21,65 +30,81 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
         values.push_back(InBoard.at(i));
         if (InBoard.at(i) == 0) {
             zeroPos = i;
+
         }
     }
+
     h_score = MisplacedTiles(values);
     g_score = gScore;
+    solvable = true;
 };
 
-Puzzle Puzzle::A_Star(){
-    int steps = 1;
-    std::vector<std::vector<int>> ClosedList;
-    while(h_score != 0){
-        std::vector<int> PosMoves = moves();
-        ClosedList.push_back(values);
-        Puzzle Extracted = solve(PosMoves,steps, ClosedList) ;
-        *this =  Extracted;
-        steps++;
-    }
-    return *this;
+void Puzzle::updateZero(int NewPos){
+    std::swap(this->values.at(zeroPos),this->values.at(NewPos));
+    this->zeroPos = NewPos;
 }
 
-Puzzle Puzzle::solve( std::vector<int> moves, int gScore, std::vector<std::vector<int>> ClosedList){
+void Puzzle::A_Star(Puzzle In){
 
-    std::vector<Puzzle> OpenList ;
+    std::cout << "Begin A* Algorithm" << std::endl;
+    std::priority_queue<Puzzle, std::vector<Puzzle>, PriorityFunc> OpenList;
+    std::vector<Puzzle> ClosedList;
 
-    //Create new Puzzles
-    for(int i = 0; i < moves.size(); i++){
-        std::vector<int> tempValues = ClosedList.back();
-        std::swap(tempValues.at(moves.at(i)),tempValues.at(zeroPos));
-        OpenList.push_back(Puzzle(tempValues, gScore));
+    OpenList.push(In);
+
+    std::make_heap(ClosedList.begin(),ClosedList.end());
+    int gScore = 1;
+    std::cout << "Open list size:" << OpenList.size() << std::endl;
+    std::cout << "Closed list size:" << ClosedList.size() << std::endl;
+
+    while( OpenList.size() != 0 ){
+
+        Puzzle CurrentPuzzle = OpenList.top();
+
+        OpenList.pop();
+        ClosedList.push_back(CurrentPuzzle);
+
+
+        std::cout << '\n';
+       if(CurrentPuzzle.ManhattanDistance() == 0){
+           std::cout << std::endl;
+           CurrentPuzzle.Display();
+           break;
+       }
+        std::sort(ClosedList.begin(),ClosedList.end());
+       std::vector<int> Moves = CurrentPuzzle.moves();
+        bool visited = false;
+       for(int i = 0; i < Moves.size(); i++){
+           Puzzle newPuzzles = Puzzle(CurrentPuzzle.values, gScore);
+           newPuzzles.updateZero( Moves.at(i));
+
+           for(int j = 0; j < ClosedList.size(); j++){
+               if(newPuzzles.values != ClosedList.at(j).values){
+                   OpenList.push(newPuzzles);
+                   break;
+               } else{
+                   newPuzzles.Display();
+                   OpenList.pop();
+               }
+           }
+       }
+
+
+        ++gScore;
+        std::cout << "Open list size:" << OpenList.size() << std::endl;
+        std::cout << "Closed list size:" << ClosedList.size() << std::endl;
+
+
+
     }
 
-    std::vector<int> fScore;
-    std::vector<Puzzle> FilteredBoards;
-    //CAlc f score
-    for(size_t i = 0; i < OpenList.size(); i++){
-        for(size_t j = 0; j < ClosedList.size(); j++) {
-            if (!(OpenList.at(i).values == ClosedList.at(j))) {
-                FilteredBoards.push_back(OpenList.at(i));
-                break;
-            }
-        }
-    }
-
-    for(int i = 0; i < FilteredBoards.size(); i++){
-        fScore.push_back(FilteredBoards.at(i).h_score + FilteredBoards.at(i).g_score);
-    }
-
-    std::vector<int>::iterator it = std::find(fScore.begin(), fScore.end(), *std::min_element(fScore.begin(),fScore.end()));
-    int index = std::distance(fScore.begin(), it);
-
-    //Return puzzle with least f score;
-    std::cout << "FScore: "<< *std::min_element(fScore.begin(),fScore.end()) <<std::endl;
-    std::cout << "GScore: " << FilteredBoards.at(index).g_score <<", " << "HScore: " << FilteredBoards.at(index).h_score <<std::endl;
-    FilteredBoards.at(index).Display();
-    return FilteredBoards.at(index);
 }
+
 
 
 void Puzzle::Display(){
     std::cout <<"After :" << g_score << " steps" <<std::endl;
+    std::cout <<"F_score is :" << g_score + this->ManhattanDistance() <<std::endl;
     for(size_t i = 0; i < values.size(); i++){
 
         if((i+1)%3 == 0){
@@ -91,7 +116,7 @@ void Puzzle::Display(){
     std::cout <<std::endl;
 }
 
-int Puzzle::MisplacedTiles(std::vector<int> board){
+int Puzzle::MisplacedTiles(std::vector<int> board) const{
     int counter = 0;
     for(size_t i = 0; i< board.size(); i++){
         if(board.at(i)-1 != i && board.at(i) != 0) {
@@ -101,7 +126,30 @@ int Puzzle::MisplacedTiles(std::vector<int> board){
     return counter;
 }
 
-int Puzzle::ManhattanDistance(){
+bool Puzzle::Solvable(){
+    int counter = 0;
+    for (size_t i  =0; i < 9; i++){
+        if(values.at(i) != 0){
+            int checkElement = values.at(i);
+            for(size_t j = i+1; j < 9; j++){
+                if(checkElement < values.at(j) ||  values.at(j) == 0 ){
+                    continue;
+
+                }
+                else {
+                    counter++;
+                }
+            }
+        }
+    }
+    if(counter %2 ==0){
+        return true;
+    } else{
+        return false;
+    }
+}
+
+int Puzzle::ManhattanDistance() const{
     int Dist = 0;
     for(int i = 0; i < values.size(); i++){
 
@@ -111,7 +159,7 @@ int Puzzle::ManhattanDistance(){
             int rightCol = (values[i]-1)%3;
             int rightRow = std::floor(values[i]-1)/3;
 
-           Dist += abs(row-rightRow)+abs(col-rightCol);
+           Dist += abs(rightRow-row)+abs(rightCol-col);
         }
     }
     return Dist;
@@ -155,10 +203,16 @@ std::vector<int> Puzzle::moves() {
     return posMoves;
 }
 
-Puzzle& Puzzle::operator= (Puzzle &inPuzzle){
+Puzzle& Puzzle::operator= ( Puzzle &inPuzzle){
     std::swap(values,inPuzzle.values);
     std::swap(zeroPos,inPuzzle.zeroPos);
     std::swap(g_score,inPuzzle.g_score);
     std::swap(h_score,inPuzzle.h_score);
     return *this;
+}
+
+bool Puzzle::operator<(const Puzzle &Puzzle2){
+    int f1 = this->g_score + this->ManhattanDistance();
+    int f2 = Puzzle2.g_score + Puzzle2.ManhattanDistance();
+    return f1 < f2;
 }

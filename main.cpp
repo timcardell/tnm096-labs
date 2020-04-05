@@ -5,19 +5,9 @@
 #include "Puzzle.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-
     Puzzle newPuzzle;
-    std::cout << "--: Begin puzzle :--" <<std::endl;
-    newPuzzle.Display();
-    newPuzzle.A_Star();
+
+  //newPuzzle.Display();
+    newPuzzle.A_Star(newPuzzle);
     return 0;
 }
-
-
-
-
-void left(){}
-void right(){}
-void up(){}
-void down(){}
