@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{1,2,3,0,4,6,7,5,8};
+    std::vector<int> inValues{0,7,5,1,2,3,8,6,4};
 
     for(int i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -12,17 +12,9 @@ Puzzle::Puzzle(){
             zeroPos = i;
         }
     }
-    h_score = MisplacedTiles(values);
+    h_score = ManhattanDistance();
     g_score = 0;
     solvable = true;
-}
-
-void Puzzle::Shuffle(){
-    std::random_device rd;
-    std::mt19937 g(rd());
-
-    std::shuffle ( values.begin(), values.end(),g );
-    solvable = this->Solvable();
 }
 
 Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
@@ -33,11 +25,22 @@ Puzzle::Puzzle(std::vector<int>  InBoard, int gScore){
 
         }
     }
-
-    h_score = MisplacedTiles(values);
+    h_score = ManhattanDistance();
     g_score = gScore;
     solvable = true;
 };
+
+void Puzzle::Shuffle(){
+    std::random_device rd;
+    std::mt19937 g(rd());
+
+    std::shuffle ( values.begin(), values.end(),g );
+    solvable = this->Solvable();
+}
+
+
+
+
 
 void Puzzle::updateZero(int NewPos){
     std::swap(this->values.at(zeroPos),this->values.at(NewPos));
@@ -53,29 +56,29 @@ void Puzzle::A_Star(Puzzle In){
     OpenList.push(In);
 
     std::make_heap(ClosedList.begin(),ClosedList.end());
-    int gScore = 1;
+
     std::cout << "Open list size:" << OpenList.size() << std::endl;
     std::cout << "Closed list size:" << ClosedList.size() << std::endl;
 
     while( OpenList.size() != 0 ){
 
         Puzzle CurrentPuzzle = OpenList.top();
+        CurrentPuzzle.Display();
 
         OpenList.pop();
         ClosedList.push_back(CurrentPuzzle);
 
+        if(CurrentPuzzle.ManhattanDistance() == 0){
+            std::cout << "-:Solved:-" <<std::endl;
 
-        std::cout << '\n';
-       if(CurrentPuzzle.ManhattanDistance() == 0){
-           std::cout << std::endl;
-           CurrentPuzzle.Display();
-           break;
-       }
-        std::sort(ClosedList.begin(),ClosedList.end());
+            break;
+        }
+
+       std::sort(ClosedList.begin(),ClosedList.end());
        std::vector<int> Moves = CurrentPuzzle.moves();
         bool visited = false;
        for(int i = 0; i < Moves.size(); i++){
-           Puzzle newPuzzles = Puzzle(CurrentPuzzle.values, gScore);
+           Puzzle newPuzzles = Puzzle(CurrentPuzzle.values, CurrentPuzzle.g_score+1);
            newPuzzles.updateZero( Moves.at(i));
 
            for(int j = 0; j < ClosedList.size(); j++){
@@ -83,18 +86,11 @@ void Puzzle::A_Star(Puzzle In){
                    OpenList.push(newPuzzles);
                    break;
                } else{
-                   newPuzzles.Display();
-                   OpenList.pop();
+                    break;
                }
            }
        }
-
-
-        ++gScore;
-        std::cout << "Open list size:" << OpenList.size() << std::endl;
-        std::cout << "Closed list size:" << ClosedList.size() << std::endl;
-
-
+        std::make_heap(ClosedList.begin(),ClosedList.end());
 
     }
 
