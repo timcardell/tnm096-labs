@@ -51,6 +51,10 @@ struct Puzzle {
 class PriorityFunc{
 public:
     bool operator()(Puzzle &Puzzle1, Puzzle &Puzzle2){
+        // Misplaced tiles
+       // int f1 = Puzzle1.g_score + Puzzle1.MisplacedTiles(Puzzle1.values);
+       // int f2 = Puzzle2.g_score + Puzzle2.MisplacedTiles(Puzzle2.values);
+
         int f1 = Puzzle1.g_score + Puzzle1.ManhattanDistance();
         int f2 = Puzzle2.g_score + Puzzle2.ManhattanDistance();
         return f1 > f2;
