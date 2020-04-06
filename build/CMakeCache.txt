@@ -71,10 +71,10 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/Lab
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/tnm096_labs
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.23.28105/bin/Hostx64/x64/link.exe
+CMAKE_LINKER:FILEPATH=C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.25.28610/bin/Hostx64/x64/link.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -106,7 +106,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=Lab
+CMAKE_PROJECT_NAME:STATIC=tnm096_labs
 
 //RC compiler
 CMAKE_RC_COMPILER:FILEPATH=rc
@@ -148,10 +148,10 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //If set, runtime paths are not added when installing shared libraries,
 // but are added when building.
-CMAKE_SKIP_INSTALL_RPATH:BOOL=OFF
+CMAKE_SKIP_INSTALL_RPATH:BOOL=NO
 
 //If set, runtime paths are not added when using shared libraries.
-CMAKE_SKIP_RPATH:BOOL=OFF
+CMAKE_SKIP_RPATH:BOOL=NO
 
 //Flags used by the linker during the creation of static libraries
 // during all build types.
@@ -177,13 +177,13 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
-CMAKE_VERBOSE_MAKEFILE:BOOL=OFF
+CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-Lab_BINARY_DIR:STATIC=C:/Users/Tobias/Documents/GitHub/tnm096-labs/build
+tnm096_labs_BINARY_DIR:STATIC=C:/Users/Tobias/Documents/GitHub/tnm096-labs/build
 
 //Value Computed by CMake
-Lab_SOURCE_DIR:STATIC=C:/Users/Tobias/Documents/GitHub/tnm096-labs
+tnm096_labs_SOURCE_DIR:STATIC=C:/Users/Tobias/Documents/GitHub/tnm096-labs
 
 
 ########################
@@ -195,9 +195,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=c:/Users/Tobias/Documents/GitHub/tnm096-labs/build
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=15
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=17
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=3
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=0
 //Path to CMake executable.
 CMAKE_COMMAND:INTERNAL=C:/Program Files/CMake/bin/cmake.exe
 //Path to cpack program executable.
@@ -285,7 +285,7 @@ CMAKE_RC_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_FLAGS_RELWITHDEBINFO
 CMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Path to CMake installation.
-CMAKE_ROOT:INTERNAL=C:/Program Files/CMake/share/cmake-3.15
+CMAKE_ROOT:INTERNAL=C:/Program Files/CMake/share/cmake-3.17
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
