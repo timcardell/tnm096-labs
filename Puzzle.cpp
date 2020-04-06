@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{1,2,3,4,5,0,6,7,8};
+    std::vector<int> inValues{8,1,2,0,4,3,7,6,5 };
 
     for(int i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
