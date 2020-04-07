@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "C:/Users/Tobias/Documents/GitHub/tnm096-labs")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-relwithdebinfo")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-default")
 
 
 # The C and CXX include file regular expressions for this directory.

@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/timcardell/Documents/tnm096-labs/Puzzle.cpp" "/Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo/CMakeFiles/Lab.dir/Puzzle.cpp.o"
-  "/Users/timcardell/Documents/tnm096-labs/main.cpp" "/Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo/CMakeFiles/Lab.dir/main.cpp.o"
+  "C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.cpp" "C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-default/CMakeFiles/tnm096_labs.dir/Puzzle.cpp.obj"
+  "C:/Users/Tobias/Documents/GitHub/tnm096-labs/main.cpp" "C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-default/CMakeFiles/tnm096_labs.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "MSVC")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

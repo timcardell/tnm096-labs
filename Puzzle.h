@@ -16,7 +16,7 @@
 struct Puzzle {
 
     Puzzle();
-    Puzzle(std::vector<int>  Board, int gScore);
+    Puzzle(Puzzle in, int gScore);
     virtual ~Puzzle(){};
 
     bool operator < (const Puzzle& str) const
@@ -25,8 +25,6 @@ struct Puzzle {
     }
 
     void A_Star(Puzzle In);
-    void Shuffle();
-    bool Solvable();
 
     void Display();
     std::vector<int> moves();
@@ -37,24 +35,21 @@ struct Puzzle {
 
     int MisplacedTiles(std::vector<int> board) const;
 
-    Puzzle& operator= (Puzzle inPuzzle);
+    Puzzle& operator= ( Puzzle inPuzzle);
 
     //Variables
     std::vector<int> values;
     int zeroPos;
     int g_score = 0;
     int h_score = 0;
-    bool solvable;
+    int f_score = 0;
+
 };
 
 
 class PriorityFunc{
 public:
     bool operator()(Puzzle &Puzzle1, Puzzle &Puzzle2){
-        // Misplaced tiles
-       // int f1 = Puzzle1.g_score + Puzzle1.MisplacedTiles(Puzzle1.values);
-       // int f2 = Puzzle2.g_score + Puzzle2.MisplacedTiles(Puzzle2.values);
-
         int f1 = Puzzle1.g_score + Puzzle1.ManhattanDistance();
         int f2 = Puzzle2.g_score + Puzzle2.ManhattanDistance();
         return f1 > f2;

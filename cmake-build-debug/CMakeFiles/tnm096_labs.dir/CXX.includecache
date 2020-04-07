@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.cpp
+Puzzle.h
+C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.h
+
 C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.h
 iostream
 -
@@ -23,14 +27,4 @@ chrono
 -
 queue
 -
-
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/main.cpp
-iostream
--
-vector
--
-algorithm
--
-Puzzle.h
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.h
 
