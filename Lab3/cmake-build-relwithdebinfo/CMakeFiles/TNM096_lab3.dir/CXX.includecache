@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Tobias/Documents/GitHub/tnm096-labs/Lab3/main.cpp
+iostream
+-
+vector
+-
+cstdlib
+-
+algorithm
+-
+
