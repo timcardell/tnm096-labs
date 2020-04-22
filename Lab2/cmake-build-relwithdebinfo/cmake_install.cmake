@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Lab2/cmake-build-relwithdebinfo/cmake_install.cmake
 # Install script for directory: /Users/timcardell/Documents/tnm096-lab2/TNM096-lab2
+=======
+# Install script for directory: /Users/timcardell/Documents/tnm096-labs
+>>>>>>> e955c195950019d5178dbf2c1ae93e60bd9a5dd5:cmake-build-relwithdebinfo/cmake_install.cmake
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +44,9 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
+<<<<<<< HEAD:Lab2/cmake-build-relwithdebinfo/cmake_install.cmake
 file(WRITE "/Users/timcardell/Documents/tnm096-lab2/TNM096-lab2/cmake-build-relwithdebinfo/${CMAKE_INSTALL_MANIFEST}"
+=======
+file(WRITE "/Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo/${CMAKE_INSTALL_MANIFEST}"
+>>>>>>> e955c195950019d5178dbf2c1ae93e60bd9a5dd5:cmake-build-relwithdebinfo/cmake_install.cmake
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

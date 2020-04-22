@@ -1,3 +1,4 @@
+<<<<<<< HEAD:Lab2/cmake-build-debug/CMakeFiles/clion-log.txt
 "C:\Program Files\JetBrains\CLion 2019.3.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - NMake Makefiles" C:\Users\Tobias\Documents\GitHub\TNM096-lab2
 -- The C compiler identification is MSVC 19.23.28106.4
 -- The CXX compiler identification is MSVC 19.23.28106.4
@@ -16,3 +17,9 @@
 -- Configuring done
 -- Generating done
 -- Build files have been written to: C:/Users/Tobias/Documents/GitHub/TNM096-lab2/cmake-build-debug
+=======
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "CodeBlocks - Unix Makefiles" /Users/timcardell/Documents/tnm096-labs
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo
+>>>>>>> e955c195950019d5178dbf2c1ae93e60bd9a5dd5:cmake-build-relwithdebinfo/CMakeFiles/clion-log.txt
