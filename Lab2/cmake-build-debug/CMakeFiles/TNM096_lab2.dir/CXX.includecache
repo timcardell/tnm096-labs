@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Tobias/Documents/GitHub/TNM096-lab2/main.cpp
+iostream
+-
+vector
+-
+string
+-
+thread
+-
+random
+-
+iomanip
+-
+cstdlib
+-
+ctime
+-
+

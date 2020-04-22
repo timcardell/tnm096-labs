@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "CodeBlocks - Unix Makefiles" /Users/timcardell/Documents/tnm096-lab2/TNM096-lab2
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/timcardell/Documents/tnm096-lab2/TNM096-lab2/cmake-build-relwithdebinfo

@@ -1,3 +1,0 @@
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-relwithdebinfo/CMakeFiles/tnm096_labs.dir
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-relwithdebinfo/CMakeFiles/edit_cache.dir
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-relwithdebinfo/CMakeFiles/rebuild_cache.dir
