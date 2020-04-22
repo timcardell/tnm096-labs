@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.cpp
+/Users/timcardell/Documents/tnm096-labs/Puzzle.cpp
 Puzzle.h
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.h
+/Users/timcardell/Documents/tnm096-labs/Puzzle.h
 
-C:/Users/Tobias/Documents/GitHub/tnm096-labs/Puzzle.h
+/Users/timcardell/Documents/tnm096-labs/Puzzle.h
 iostream
 -
 vector

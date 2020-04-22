@@ -4,7 +4,7 @@
 #include "Puzzle.h"
 
 Puzzle::Puzzle(){
-    std::vector<int> inValues{7,3,5,4,8,1,2,6,0};
+    std::vector<int> inValues{8,6,7,2,5,4,3,0,1};
    // std::vector<int> inValues{1,2,3,0,4,6,7,5,8};
     for(int i = 0; i < 9; i++) {
         values.push_back(inValues.at(i));
@@ -47,10 +47,11 @@ void Puzzle::A_Star(Puzzle In){
         Puzzle CurrentPuzzle = OpenList.top();
         OpenList.pop();
         ClosedList.push_back(CurrentPuzzle);
-        CurrentPuzzle.Display();
+
         if(CurrentPuzzle.h_score == 0){
             std::cout << "-:Solved:-" <<std::endl;
             CurrentPuzzle.Display();
+
            // std::cout << "Displaying right path:" <<std::endl;
             break;
         }

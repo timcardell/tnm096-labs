@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Tobias/Documents/GitHub/tnm096-labs
+# Install script for directory: /Users/timcardell/Documents/tnm096-labs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/tnm096_labs")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Tobias/Documents/GitHub/tnm096-labs/cmake-build-relwithdebinfo/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/timcardell/Documents/tnm096-labs/cmake-build-relwithdebinfo/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
