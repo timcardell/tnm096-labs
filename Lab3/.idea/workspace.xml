@@ -23,9 +23,10 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:RelWithDebInfo" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1aszpeYRsFJibqV7PWHN4LDNwnN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -55,6 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587539273710</updated>
       <workItem from="1587539275118" duration="1044000" />
+      <workItem from="1587541065842" duration="4502000" />
     </task>
     <servers />
   </component>
