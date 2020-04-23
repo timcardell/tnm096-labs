@@ -16,7 +16,7 @@ struct Clauses{
       return false;
     }
 
-
+    bool Clauses::isSubset(Clauses c);
 
     std::vector<std::string> neg;
     std::vector<std::string> pos;
@@ -216,13 +216,13 @@ return KB
 
 std::vector<Clauses> Incorporate_clause(Clauses A,std::vector<Clauses> KB){
     for(Clauses B: KB){
-        if(B == A){
+        if(B.isSubset(A)){
             return KB;
         }
     }
 
     for(Clauses B: KB){
-        if(A == B){
+        if(A.isSubset(B)){
             KB.erase(std::remove(KB.begin(),KB.end(),B),KB.end());
         }
     }
@@ -245,6 +245,24 @@ std::vector<Clauses> UnionClauses(Clauses A,std::vector<Clauses> KB){
         }
     }
     return Res;
+}
+
+ bool Clauses::isSubset(Clauses c){
+    for (int i = 0; i < c.pos.size(); i++)
+    {
+        std::vector<std::string>::iterator it = std::find(c.pos.begin(), c.pos.end(), c.pos.at(i));
+        if(it == c.pos.end())
+            return false;
+    }
+
+    for (int i = 0; i < c.neg.size(); i++)
+    {
+        std::vector<std::string>::iterator it = std::find(c.neg.begin(), c.neg.end(), c.neg.at(i));
+        if(it == c.neg.end())
+            return false;
+    }
+
+    return true;
 }
 
 std::ostream &operator<<( std::ostream &out, Clauses &c){
