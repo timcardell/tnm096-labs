@@ -244,26 +244,34 @@ std::vector<Clauses> UnionClauses(Clauses A,std::vector<Clauses> KB){
 }
 
 std::ostream &operator<<( std::ostream &out, Clauses &c){
-    out << "pos: {";
-    for(int i = 0; i <c.pos.size(); i++){
-        if(c.pos.size() > 1){
-            out << c.pos.at(i) <<", ";
-        } else{
-            out << c.pos.at(i);
-        }
+
+    if(c.pos.size() == 0 && c.neg.size() == 0){
+        out <<"false" <<std::endl;
     }
-    out << "} ";
-
-    out << "neg: {";
-    for(int i = 0; i <c.neg.size(); i++){
-
-        if(c.neg.size() > 1){
-            out << c.neg.at(i) <<", ";
-        } else{
-            out << c.neg.at(i);
+    else{
+        out << "pos: {";
+        for(int i = 0; i <c.pos.size(); i++){
+            if(c.pos.size() > 1){
+                out << c.pos.at(i) <<", ";
+            } else{
+                out << c.pos.at(i);
+            }
         }
+        out << "} ";
 
+        out << "neg: {";
+        for(int i = 0; i <c.neg.size(); i++){
+
+            if(c.neg.size() > 1){
+                out << c.neg.at(i) <<", ";
+            } else{
+                out << c.neg.at(i);
+            }
+
+        }
+        out << "} " <<  std::endl;
     }
-    out << "} " <<  std::endl;
+
+
     return out;
 }
