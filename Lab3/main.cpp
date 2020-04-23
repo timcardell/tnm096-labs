@@ -16,6 +16,8 @@ struct Clauses{
       return false;
     }
 
+
+
     std::vector<std::string> neg;
     std::vector<std::string> pos;
 };
@@ -31,6 +33,7 @@ int CardinalLess (Clauses A);
 std::vector<Clauses> UnionClauses(Clauses A,std::vector<Clauses> KB);
 Clauses resolution(Clauses A, Clauses B);
 bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2);
+std::ostream &operator<<( std::ostream &out, Clauses &c);
 
 int main() {
 
@@ -38,22 +41,16 @@ int main() {
     Clauses B = Clauses({"b","c"},{""});
     Clauses C = resolution(A,B);
 
-    if(C.neg.size() == 0){
+    if(C.pos.size() == 0 && C.neg.size() == 0){
         std::cout <<"false" <<std::endl;
     }
     else{
-        for(int i = 0; i < C.pos.size(); i++){
-            std::cout << C.pos.at(i) <<", ";
-        }
-
-        for(int i = 0; i < C.neg.size(); i++){
-            std::cout << C.neg.at(i)  <<", ";
-        }
-        }
+        std::cout << C <<std::endl;
+    }
 
 
     std::vector<Clauses> KB = {A,B};
-    KB=Solver(KB);
+   // KB=Solver(KB);
 
     return 0;
 }
@@ -246,3 +243,27 @@ std::vector<Clauses> UnionClauses(Clauses A,std::vector<Clauses> KB){
     return Res;
 }
 
+std::ostream &operator<<( std::ostream &out, Clauses &c){
+    out << "pos: {";
+    for(int i = 0; i <c.pos.size(); i++){
+        if(c.pos.size() > 1){
+            out << c.pos.at(i) <<", ";
+        } else{
+            out << c.pos.at(i);
+        }
+    }
+    out << "} ";
+
+    out << "neg: {";
+    for(int i = 0; i <c.neg.size(); i++){
+
+        if(c.neg.size() > 1){
+            out << c.neg.at(i) <<", ";
+        } else{
+            out << c.neg.at(i);
+        }
+
+    }
+    out << "} " <<  std::endl;
+    return out;
+}
