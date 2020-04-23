@@ -50,8 +50,11 @@ int main() {
 
 
     std::vector<Clauses> KB = {A,B};
-   // KB=Solver(KB);
+    KB=Solver(KB);
 
+    for(Clauses S: KB){
+        std::cout << S <<std::endl;
+    }
     return 0;
 }
 
@@ -160,17 +163,18 @@ until KB0 = KB
  */
 
 std::vector<Clauses> Solver(std::vector<Clauses> KB){
-    std::vector<Clauses> S = {};
+
     std::vector<Clauses> KBap;
 do{
+    std::vector<Clauses> S = {};
     KBap = KB;
 
     for(Clauses A: KB){
         for(Clauses B: KB){
 
             Clauses C = resolution(A,B);
-            if(C.pos.size() != 0){
-                S = UnionClauses(C,S);
+            if(C.pos.size() != 0 && C.neg.size() != 0){
+                S.push_back(C);
             }
         }
     }
@@ -212,18 +216,18 @@ return KB
 
 std::vector<Clauses> Incorporate_clause(Clauses A,std::vector<Clauses> KB){
     for(Clauses B: KB){
-        if(CardinalLess(B) - CardinalLess(A) < 0){
+        if(B == A){
             return KB;
         }
     }
 
     for(Clauses B: KB){
-        if(CardinalLess(A) - CardinalLess(B) < 0){
+        if(A == B){
             KB.erase(std::remove(KB.begin(),KB.end(),B),KB.end());
         }
     }
 
-    KB = UnionClauses(A,KB);
+    KB.push_back(A);
     return KB;
 }
 

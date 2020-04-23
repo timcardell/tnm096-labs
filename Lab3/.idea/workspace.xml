@@ -21,7 +21,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:RelWithDebInfo" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -76,29 +76,33 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="549" y="172" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1587624102679" />
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1587640704694">
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom" timestamp="1587649442009">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1587640704694" />
+    <state width="1493" height="213" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1587649442009" />
     <state width="1238" height="174" key="GridCell.Tab.0.bottom/0.23.1280.708@0.23.1280.708" timestamp="1587540141751" />
-    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1587640704694">
+    <state width="1493" height="213" key="GridCell.Tab.0.center" timestamp="1587649442009">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1587640704694" />
+    <state width="1493" height="213" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1587649442009" />
     <state width="1238" height="174" key="GridCell.Tab.0.center/0.23.1280.708@0.23.1280.708" timestamp="1587540141750" />
-    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1587640704694">
+    <state width="1493" height="213" key="GridCell.Tab.0.left" timestamp="1587649442008">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1587640704694" />
+    <state width="1493" height="213" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1587649442008" />
     <state width="1238" height="174" key="GridCell.Tab.0.left/0.23.1280.708@0.23.1280.708" timestamp="1587540141749" />
-    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1587640704694">
+    <state width="1493" height="213" key="GridCell.Tab.0.right" timestamp="1587649442009">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1587640704694" />
+    <state width="1493" height="213" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1587649442009" />
     <state width="1238" height="174" key="GridCell.Tab.0.right/0.23.1280.708@0.23.1280.708" timestamp="1587540141750" />
     <state x="277" y="60" key="SettingsEditor" timestamp="1587622992166">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="277" y="60" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1587622992166" />
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup" timestamp="1587649426170">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="431" y="155" width="672" height="678" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1587649426170" />
   </component>
 </project>
