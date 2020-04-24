@@ -18,7 +18,7 @@ struct Clauses {
         return false;
     }
 
-    bool Clauses::isSubset(Clauses c);
+    bool isSubset(Clauses c);
 
     std::vector<std::string> neg;
     std::vector<std::string> pos;
@@ -51,13 +51,12 @@ int main() {
     if (C.pos.size() == 0 && C.neg.size() == 0) {
         std::cout << "false" << std::endl;
     } else {
-        std::cout << C << std::endl;
+        //std::cout << C << std::endl;
     }
 
 
     std::vector<Clauses> KB = {A, B};
     KB = Solver(KB);
-
     for (Clauses S: KB) {
         std::cout << S << std::endl;
     }
@@ -117,8 +116,6 @@ Clauses resolution(Clauses A, Clauses B) {
         int randIndex = rand() % conjList.size();
         std::string a = conjList.at(randIndex);
 
-        std::cout << "A negative: " << A.neg.at(0) << std::endl;
-        std::cout << "B positive: " << B.pos.at(1) << std::endl;
         int counter1 = 0;
         int counter2 = 0;
 
@@ -133,13 +130,9 @@ Clauses resolution(Clauses A, Clauses B) {
                 ++counter1;
             }
         }
-
-        A.neg.erase(A.neg.begin() + counter1 - 1);
+        A.neg.erase(A.neg.begin() + counter1 );
         B.pos.erase(B.pos.begin() + counter2 - 1);
 
-        std::cout << A.neg.size() << std::endl;
-        std::cout << "anegNew " << A.neg.at(0) << std::endl;
-        std::cout << "bposNew " << B.pos.at(0) << std::endl;
     }
 
     Clauses C;
@@ -202,21 +195,25 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
         std::vector<Clauses> S = {};
         KBap = KB;
 
-        for (Clauses A: KB) {
-            for (Clauses B: KB) {
+        for (int i= 0; i < KB.size()-1; i++) {
 
-                Clauses C = resolution(A, B);
-                if (C.pos.size() != 0 && C.neg.size() != 0) {
+            for (int j= i+1; j < KB.size(); j++) {
+
+                Clauses C = resolution(KB.at(i), KB.at(j));
+                std::cout << C <<std::endl;
+                if (C.pos.size() != 0 || C.neg.size() != 0) {
                     S.push_back(C);
                 }
             }
         }
+
         if (S.size() == 0) {
             return KB;
         }
+        std::cout <<KB.size() <<std::endl;
         KB = Incorporate(S, KB);
+        std::cout <<KB.size() <<std::endl;
     } while (KBap != KB);
-
 
 }
 
@@ -237,7 +234,7 @@ std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB
 
 /*function Incorporate clause(A,KB) return set of clauses
 Input: clause A, set of clauses KB
-if there is a clause B ∈ KB such that B < A do
+if there is a clause B ∈ KB such that B ≺= A do
 return KB
 for each B in KB :
 if A ≺ B do
@@ -252,7 +249,6 @@ std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
             return KB;
         }
     }
-
     for (Clauses B: KB) {
         if (A.isSubset(B)) {
             KB.erase(std::remove(KB.begin(), KB.end(), B), KB.end());
@@ -261,22 +257,6 @@ std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
 
     KB.push_back(A);
     return KB;
-}
-
-int CardinalLess(Clauses A) {
-    int cardinalA = 0;
-    cardinalA = A.pos.size() + A.neg.size();
-    return cardinalA;
-}
-
-std::vector<Clauses> UnionClauses(Clauses A, std::vector<Clauses> KB) {
-    std::vector<Clauses> Res;
-    for (Clauses B: KB) {
-        if (A == B) {
-            Res.push_back(A);
-        }
-    }
-    return Res;
 }
 
 bool Clauses::isSubset(Clauses c) {
