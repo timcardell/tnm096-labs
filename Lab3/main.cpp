@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include <algorithm>
+#include <time.h>
 
 struct Clauses {
 
@@ -27,23 +28,17 @@ struct Clauses {
 
 //Functions
 std::vector<Clauses> Solver(std::vector<Clauses> KB);
-
 std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB);
-
 std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB);
-
-int CardinalLess(Clauses A);
-
-std::vector<Clauses> UnionClauses(Clauses A, std::vector<Clauses> KB);
-
 Clauses resolution(Clauses A, Clauses B);
-
 bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2);
-
 std::ostream &operator<<(std::ostream &out, Clauses &c);
+std::vector<Clauses> removeDuplicates(std::vector<Clauses> KB);
+void display(std::vector<Clauses> KB);
+
 
 int main() {
-
+    srand (time(NULL));
     Clauses A = Clauses({"sun","money"}, {"ice"});
     Clauses B = Clauses({"money"}, {"ice","movie"});
     Clauses C = Clauses({"movie"}, {"money"});
@@ -54,9 +49,8 @@ int main() {
 
     std::vector<Clauses> KB = {A,B,C,D,E};
     KB = Solver(KB);
-
+    std::cout << "Solved: " << std::endl;
     for (Clauses S: KB) {
-
         std::cout << S << std::endl;
     }
     return 0;
@@ -152,35 +146,17 @@ Clauses resolution(Clauses A, Clauses B) {
 
 }
 
-/*
-function Solver(KB) return set of clauses
-        Input: set of clauses KB
-repeat
-        S = {}
-KB0 ← KB
-for each A, B in KB :
-C ← Resolution(A,B)
-if C = false do
-S ← S ∪ {C}
-if S = {}
-return KB
-        KB ← Incorporate(S, KB)
-until KB0 = KB
- */
-
 std::vector<Clauses> Solver(std::vector<Clauses> KB) {
 
-    std::vector<Clauses> KBap;
+    std::vector<Clauses> KBDot;
     do {
         std::vector<Clauses> S = {};
-        KBap = KB;
+        KBDot = KB;
 
         for (int i= 0; i < KB.size()-1; i++) {
-
             for (int j= i+1; j < KB.size(); j++) {
 
                 Clauses C = resolution(KB.at(i), KB.at(j));
-
 
                 if (C.pos.size() != 0 || C.neg.size() != 0) {
                     S.push_back(C);
@@ -188,55 +164,42 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
             }
         }
 
-        if (S.size() == 0) {
+       std::cout <<std::endl<<"This is S in do: "<<std::endl;
+        display(S);
+
+        if (S.size() == 0){
             return KB;
         }
 
-        KB = Incorporate(S, KB);
+        std::cout <<"This is KB before incorporate: "<<std::endl;
+        display(KB);
 
-    } while (KBap != KB);
+        //Incorporate S in KB
+        KB = Incorporate(S, KB);
+        KB = removeDuplicates(KB);
+
+        std::cout <<"This is KB after incorporate: "<<std::endl;
+        display(KB);
+    } while (KBDot != KB);
 
 }
 
-/*
-function Incorporate(S,KB) return set of clauses
-        Input: set of clauses S, set of clauses KB
-for each A in S :
-KB ← Incorporate clause(A, KB)
-return KB
- */
-
 std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB) {
-    for (Clauses A: S) {
-        KB = Incorporate_clause(A, KB);
+    for (int i = 0; i < S.size(); i++) {
+        KB = Incorporate_clause(S.at(i), KB);
     }
     return KB;
 }
 
-/*function Incorporate clause(A,KB) return set of clauses
-Input: clause A, set of clauses KB
-if there is a clause B ∈ KB such that B ≺= A do
-return KB
-for each B in KB :
-if A ≺ B do
-KB ← KB − {B}
-KB ← KB ∪ {A}
-return KB
-*/
-
 std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
-    for (Clauses B: KB) {
-        if (B.isSubset(A)) {
+    for (int i = 0; i < KB.size(); i++) {
+        if (KB.at(i) == A) {
             return KB;
         }
-    }
-    for (Clauses B: KB) {
-        if (A.isSubset(B)) {
-            KB.erase(std::remove(KB.begin(), KB.end(), B), KB.end());
+        else if (A.isSubset(KB.at(i))) {
+            KB.erase(KB.begin() + i);
         }
     }
-
-    KB.push_back(A);
     return KB;
 }
 
@@ -256,39 +219,50 @@ bool Clauses::isSubset(Clauses c) {
     return true;
 }
 
+std::vector<Clauses> removeDuplicates(std::vector<Clauses> KB){
+    std::vector<Clauses>tempKB = KB;
+
+    for (int i = 0; i < KB.size() -1; i++){
+        for (int j = i + 1; j < tempKB.size(); j++){
+            if (KB.at(i) == tempKB.at(i)){
+                KB.erase(KB.begin() + i);
+            }
+        }
+    }
+    return KB;
+}
+
 std::ostream &operator<<(std::ostream &out, Clauses &c) {
 
     if (c.pos.size() == 0 && c.neg.size() == 0) {
         out << "false" << std::endl;
-    } else {
-
+    }
+    else {
+        out << "{ ";
         for (int i = 0; i < c.pos.size(); i++) {
-
-            if (c.pos.size() > 1) {
-                out << c.pos.at(i) ;
-            }
+            out << c.pos.at(i) ;
             if(i != c.pos.size()-1){
                 out << " V ";
             }
         }
 
-        if(c.neg.size() > 1 && c.pos.size() > 1){
+        if(c.neg.size() > 0 && c.pos.size() > 0){
             out << " V ";
         }
 
         for (int i = 0; i < c.neg.size(); i++) {
-
-            if (c.neg.size() >= 1) {
-                out <<"-" << c.neg.at(i) ;
-            }
+            out <<"-" << c.neg.at(i) ;
             if(i != c.neg.size()-1){
                 out << " V ";
             }
-
         }
-
+        out << "} ";
     }
-
-
     return out;
+}
+
+void display(std::vector<Clauses> KB){
+    for (int i = 0; i < KB.size(); i++){
+        std::cout << KB.at(i) <<std::endl;
+    }
 }
