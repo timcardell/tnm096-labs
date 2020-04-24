@@ -44,19 +44,21 @@ std::ostream &operator<<(std::ostream &out, Clauses &c);
 
 int main() {
 
-    Clauses A = Clauses({"c"}, {"a","b"});
-    Clauses B = Clauses({}, {"c", "b"});
+    Clauses A = Clauses({"sun","money"}, {"ice"});
+    Clauses B = Clauses({"money"}, {"ice","movie"});
+    Clauses C = Clauses({"movie"}, {"money"});
+    Clauses D = Clauses({"movie","ice"}, {});
+    Clauses E = Clauses({}, {"movie"});
 
-    Clauses C = resolution(A,B);
-    Clauses D = Clauses({}, {"a", "b"});
-    std::cout << C <<std::endl;
 
-   // std::vector<Clauses> KB = {A,B,C,D,E};
-    //KB = Solver(KB);
 
-    //for (Clauses S: KB) {
-    //    std::cout << S << std::endl;
-   // }
+    std::vector<Clauses> KB = {A,B,C,D,E};
+    KB = Solver(KB);
+
+    for (Clauses S: KB) {
+
+        std::cout << S << std::endl;
+    }
     return 0;
 }
 
@@ -185,9 +187,6 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
                 }
             }
         }
-        for(Clauses K: S){
-            std::cout << K <<std::endl;
-        }
 
         if (S.size() == 0) {
             return KB;
@@ -264,7 +263,8 @@ std::ostream &operator<<(std::ostream &out, Clauses &c) {
     } else {
 
         for (int i = 0; i < c.pos.size(); i++) {
-            if (c.pos.size() >= 1) {
+
+            if (c.pos.size() > 1) {
                 out << c.pos.at(i) ;
             }
             if(i != c.pos.size()-1){
