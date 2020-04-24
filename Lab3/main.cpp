@@ -44,29 +44,27 @@ std::ostream &operator<<(std::ostream &out, Clauses &c);
 
 int main() {
 
-    Clauses A = Clauses({"c"}, {"a", "b"});
+    Clauses A = Clauses({"c"}, {"a","b"});
     Clauses B = Clauses({}, {"c", "b"});
-    Clauses C = resolution(A, B);
 
-    if (C.pos.size() == 0 && C.neg.size() == 0) {
-        std::cout << "false" << std::endl;
-    } else {
-        //std::cout << C << std::endl;
-    }
+    Clauses C = resolution(A,B);
+    Clauses D = Clauses({}, {"a", "b"});
+    std::cout << C <<std::endl;
 
+   // std::vector<Clauses> KB = {A,B,C,D,E};
+    //KB = Solver(KB);
 
-    std::vector<Clauses> KB = {A, B};
-    KB = Solver(KB);
-    for (Clauses S: KB) {
-        std::cout << S << std::endl;
-    }
+    //for (Clauses S: KB) {
+    //    std::cout << S << std::endl;
+   // }
     return 0;
 }
 
 
 bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2) {
+
     for (int i = 0; i < vec1.size(); i++) {
-        for (int j = 0; i < vec2.size(); j++) {
+        for (int j = 0; j < vec2.size(); j++) {
             if (vec1.at(i) == vec2.at(j)) {
                 return false;
             }
@@ -77,31 +75,28 @@ bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2) {
 
 Clauses resolution(Clauses A, Clauses B) {
 
-
     if (disjoint(A.pos, B.neg) && disjoint(A.neg, B.pos)) {
-
         return Clauses();
     }
-
 
     if (!disjoint(A.pos, B.neg)) {
         std::vector<std::string> conjList;
 
-
         for (int i = 0; i < A.pos.size(); i++) {
             for (int j = 0; j < B.neg.size(); j++) {
-
-                if (A.pos.at(i) != B.neg.at(j)) {
+                if (A.pos.at(i) == B.neg.at(j)) {
                     conjList.push_back(A.pos.at(i));
-
                 }
             }
         }
 
         int randIndex = rand() % conjList.size();
+
         std::string a = conjList.at(randIndex);
+
         A.pos.erase(std::remove(A.pos.begin(), A.pos.begin(), a), A.pos.end());
-        B.pos.erase(std::remove(B.pos.begin(), B.pos.begin(), a), B.pos.end());
+        B.neg.erase(std::remove(B.neg.begin(), B.neg.begin(), a), B.neg.end());
+
     }
     else {
         std::vector<std::string> conjList;
@@ -111,46 +106,29 @@ Clauses resolution(Clauses A, Clauses B) {
                     conjList.push_back(A.neg.at(i));
                 }
             }
-
         }
+
         int randIndex = rand() % conjList.size();
         std::string a = conjList.at(randIndex);
 
-        int counter1 = 0;
-        int counter2 = 0;
-
-        for (int k = 0; k < B.pos.size(); k++) {
-
-            if (B.pos.at(k) != a) {
-                ++counter2;
-            }
-        }
-        for (int k = 0; k < A.neg.size(); k++) {
-            if (A.neg.at(k) != a) {
-                ++counter1;
-            }
-        }
-        A.neg.erase(A.neg.begin() + counter1 );
-        B.pos.erase(B.pos.begin() + counter2 - 1);
-
+        A.neg.erase(std::remove(A.neg.begin(),  A.neg.end(), a), A.neg.end());
+        B.pos.erase(std::remove(B.pos.begin(),  B.pos.end(), a), B.pos.end());
     }
 
     Clauses C;
     std::vector<std::string> unPos = {};
     std::vector<std::string> unNeg = {};
+
     for (std::string A: A.pos) {
         for (std::string B: B.pos) {
-            if (A == B) {
-                unPos.push_back(A);
-            }
+            unPos.push_back(A);
+
         }
     }
 
     for (std::string A: A.neg) {
         for (std::string B: B.neg) {
-            if (A == B) {
                 unNeg.push_back(A);
-            }
         }
     }
 
@@ -200,19 +178,23 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
             for (int j= i+1; j < KB.size(); j++) {
 
                 Clauses C = resolution(KB.at(i), KB.at(j));
-                std::cout << C <<std::endl;
+
+
                 if (C.pos.size() != 0 || C.neg.size() != 0) {
                     S.push_back(C);
                 }
             }
         }
+        for(Clauses K: S){
+            std::cout << K <<std::endl;
+        }
 
         if (S.size() == 0) {
             return KB;
         }
-        std::cout <<KB.size() <<std::endl;
+
         KB = Incorporate(S, KB);
-        std::cout <<KB.size() <<std::endl;
+
     } while (KBap != KB);
 
 }
@@ -280,27 +262,31 @@ std::ostream &operator<<(std::ostream &out, Clauses &c) {
     if (c.pos.size() == 0 && c.neg.size() == 0) {
         out << "false" << std::endl;
     } else {
-        out << "pos: {";
+
         for (int i = 0; i < c.pos.size(); i++) {
-            if (c.pos.size() > 1) {
-                out << c.pos.at(i) << ", ";
-            } else {
-                out << c.pos.at(i);
+            if (c.pos.size() >= 1) {
+                out << c.pos.at(i) ;
+            }
+            if(i != c.pos.size()-1){
+                out << " V ";
             }
         }
-        out << "} ";
 
-        out << "neg: {";
+        if(c.neg.size() > 1 && c.pos.size() > 1){
+            out << " V ";
+        }
+
         for (int i = 0; i < c.neg.size(); i++) {
 
-            if (c.neg.size() > 1) {
-                out << c.neg.at(i) << ", ";
-            } else {
-                out << c.neg.at(i);
+            if (c.neg.size() >= 1) {
+                out <<"-" << c.neg.at(i) ;
+            }
+            if(i != c.neg.size()-1){
+                out << " V ";
             }
 
         }
-        out << "} " << std::endl;
+
     }
 
 
