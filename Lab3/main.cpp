@@ -164,7 +164,7 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
             }
         }
 
-       std::cout <<std::endl<<"This is S in do: "<<std::endl;
+        std::cout <<std::endl<<"This is S in do: "<<std::endl;
         display(S);
 
         if (S.size() == 0){
@@ -196,10 +196,17 @@ std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
         if (KB.at(i) == A) {
             return KB;
         }
-        else if (A.isSubset(KB.at(i))) {
+
+    }
+    for (int i = 0; i < KB.size(); i++) {
+        if (A.isSubset(KB.at(i))) {
             KB.erase(KB.begin() + i);
         }
     }
+
+    KB.push_back(A);
+
+
     return KB;
 }
 
