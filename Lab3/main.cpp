@@ -13,10 +13,16 @@ struct Clauses {
     ~Clauses() = default;
 
     bool operator==(Clauses right) const {
-        if (pos == right.pos && neg == right.neg) {
-            return true;
-        }
-        return false;
+        return (pos == right.pos && neg == right.neg);
+
+    }
+
+    bool operator!=(Clauses right) const {
+        return !(pos == right.pos && neg == right.neg);
+    }
+
+    bool operator<(Clauses right) const {
+        return (pos < right.pos && neg < right.neg) ;
     }
 
     bool isSubset(Clauses c);
@@ -32,7 +38,7 @@ std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB
 std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB);
 Clauses resolution(Clauses A, Clauses B);
 std::ostream &operator<<(std::ostream &out, Clauses &c);
-std::vector<Clauses> removeDuplicates(std::vector<Clauses> KB);
+std::vector<Clauses> removeDuplicates(std::vector<Clauses> &KB);
 void display(std::vector<Clauses> KB);
 std::vector<std::string> GetIntersection(std::vector<std::string> A, std::vector<std::string> B);
 std::vector<std::string> GetUnion(std::vector<std::string> A, std::vector<std::string> B);
@@ -88,7 +94,6 @@ Clauses resolution(Clauses A, Clauses B) {
     C.pos = UnionApBp;
     C.neg = UnionAnBn;
 
-
     std::vector<std::string> IntersectionCpCn = GetIntersection(C.pos,C.neg);
     if(IntersectionCpCn.size() != 0){
         return Clauses();
@@ -108,22 +113,23 @@ Clauses resolution(Clauses A, Clauses B) {
 std::vector<Clauses> Solver(std::vector<Clauses> KB) {
 
     std::vector<Clauses> KBDot;
-    do {
+    while(true) {
         std::vector<Clauses> S = {};
         KBDot = KB;
 
         for (int i= 0; i < KB.size()-1; i++) {
-            for (int j= i+1; j < KB.size(); j++) {
+            for (int j = i + 1; j < KB.size(); j++) {
 
                 Clauses C = resolution(KB.at(i), KB.at(j));
-                
-                if(C.pos.size() != 0 || C.neg.size() != 0 ){
-                        S.push_back(C);
-                }
 
+                if (C.pos.size() > 0 || C.neg.size() > 0) {
+                    S.push_back(C);
+                }
             }
         }
-        if (S.empty()){
+        S = removeDuplicates(S);
+
+        if (S.size() == 0){
             return KB;
         }
 
@@ -133,11 +139,11 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
 
         //Incorporate S in KB
         KB = Incorporate(S, KB);
+        KB = removeDuplicates(KB);
 
         std::cout <<"This is KB after incorporate: "<<std::endl;
         display(KB);
-    } while (KBDot != KB);
-
+    }
 }
 
 std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB) {
@@ -149,29 +155,31 @@ std::vector<Clauses> Incorporate(std::vector<Clauses> S, std::vector<Clauses> KB
 }
 
 std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
-    for (Clauses B:KB) {
-        Clauses Comb;
-        Comb.pos = GetIntersection(B.pos,A.pos);
-        Comb.neg = GetIntersection(B.neg,A.neg);
-        if (Comb.pos == A.pos && Comb.neg == A.neg) {
+    for (auto it = KB.begin(); it != KB.end();) {
+        Clauses AB;
+        AB.pos = GetIntersection(A.pos, it->pos);
+        AB.neg = GetIntersection(A.neg, it->neg);
+
+        Clauses BA;
+        BA.pos = GetIntersection(it->pos, A.pos);
+        BA.neg = GetIntersection(it->neg, A.neg);
+
+        size_t orgP = it->pos.size();
+        size_t orgN = it->neg.size();
+        size_t size1 = AB.pos.size();
+        size_t size2 = AB.neg.size();
+
+        if ((AB.pos == A.pos && AB.neg == A.neg) && (size1 < orgP || size2 < orgN)) {
+            it = KB.erase(it);
+        }
+        else if(BA.pos == it->pos && BA.neg == it->neg) {
             return KB;
         }
-    }
-
-    for (Clauses B: KB) {
-        Clauses aCombined;
-        aCombined.pos = GetIntersection(A.pos,B.pos);
-        aCombined.neg = GetIntersection(A.neg,B.neg);
-
-        size_t orgP = B.pos.size();
-        size_t orgN = B.neg.size();
-        size_t size1 = aCombined.pos.size();
-        size_t size2 = aCombined.neg.size();
-
-        if ((aCombined.pos == A.pos && aCombined.neg == A.neg) && (size1 <orgP || size2 <orgN)) {
-          KB.erase(std::remove(KB.begin(),KB.end(),B),KB.end());
+        else {
+            it++;
         }
     }
+
     if (std::find(KB.begin(), KB.end(), A) == KB.end()){
         KB.push_back(A);
     }
@@ -180,32 +188,9 @@ std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
     return KB;
 }
 
-bool Clauses::isSubset(Clauses c) {
-    for (int i = 0; i < c.pos.size(); i++) {
-        std::vector<std::string>::iterator it = std::find(c.pos.begin(), c.pos.end(), c.pos.at(i));
-        if (it == c.pos.end())
-            return false;
-    }
-
-    for (int i = 0; i < c.neg.size(); i++) {
-        std::vector<std::string>::iterator it = std::find(c.neg.begin(), c.neg.end(), c.neg.at(i));
-        if (it == c.neg.end())
-            return false;
-    }
-
-    return true;
-}
-
-std::vector<Clauses> removeDuplicates(std::vector<Clauses> KB){
-    std::vector<Clauses>tempKB = KB;
-
-    for (int i = 0; i < KB.size() -1; i++){
-        for (int j = i + 1; j < tempKB.size(); j++){
-            if (KB.at(i) == tempKB.at(i)){
-                KB.erase(KB.begin() + i);
-            }
-        }
-    }
+std::vector<Clauses> removeDuplicates(std::vector<Clauses> &KB){
+    std::sort( KB.begin(), KB.end() );
+    KB.erase( std::unique( KB.begin(), KB.end() ), KB.end() );
     return KB;
 }
 
