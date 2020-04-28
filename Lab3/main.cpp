@@ -35,7 +35,8 @@ bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2);
 std::ostream &operator<<(std::ostream &out, Clauses &c);
 std::vector<Clauses> removeDuplicates(std::vector<Clauses> KB);
 void display(std::vector<Clauses> KB);
-
+std::vector<std::string> GetIntersection(std::vector<std::string> A, std::vector<std::string> B);
+std::vector<std::string> GetUnion(std::vector<std::string> A, std::vector<std::string> B);
 
 int main() {
     srand (time(NULL));
@@ -70,75 +71,43 @@ bool disjoint(std::vector<std::string> &vec1, std::vector<std::string> &vec2) {
 }
 
 Clauses resolution(Clauses A, Clauses B) {
-
-    if (disjoint(A.pos, B.neg) && disjoint(A.neg, B.pos)) {
+    std::vector<std::string> IntersectionApBn = GetIntersection(A.pos,B.neg);
+    std::vector<std::string> IntersectionAnBp = GetIntersection(A.neg,B.pos);
+    if (IntersectionApBn.empty() && IntersectionAnBp.empty()) {
         return Clauses();
     }
 
-    if (!disjoint(A.pos, B.neg)) {
-        std::vector<std::string> conjList;
-
-        for (int i = 0; i < A.pos.size(); i++) {
-            for (int j = 0; j < B.neg.size(); j++) {
-                if (A.pos.at(i) == B.neg.at(j)) {
-                    conjList.push_back(A.pos.at(i));
-                }
-            }
-        }
-
-        int randIndex = rand() % conjList.size();
-
-        std::string a = conjList.at(randIndex);
-
-        A.pos.erase(std::remove(A.pos.begin(), A.pos.begin(), a), A.pos.end());
-        B.neg.erase(std::remove(B.neg.begin(), B.neg.begin(), a), B.neg.end());
-
+    if (!IntersectionApBn.empty()) {
+        int randIndex = rand() % IntersectionApBn.size();
+        std::string a = IntersectionApBn.at(randIndex);
+        A.neg.erase(std::remove(A.pos.begin(),  A.pos.end(), a), A.pos.end());
+        B.pos.erase(std::remove(B.neg.begin(),  B.neg.end(), a), B.neg.end());
     }
     else {
-        std::vector<std::string> conjList;
-        for (int i = 0; i < A.neg.size(); i++) {
-            for (int j = 0; j < B.pos.size(); j++) {
-                if (A.neg.at(i) == B.pos.at(j)) {
-                    conjList.push_back(A.neg.at(i));
-                }
-            }
-        }
-
-        int randIndex = rand() % conjList.size();
-        std::string a = conjList.at(randIndex);
-
+        int randIndex = rand() % IntersectionAnBp.size();
+        std::string a = IntersectionAnBp.at(randIndex);
         A.neg.erase(std::remove(A.neg.begin(),  A.neg.end(), a), A.neg.end());
         B.pos.erase(std::remove(B.pos.begin(),  B.pos.end(), a), B.pos.end());
     }
 
     Clauses C;
-    std::vector<std::string> unPos = {};
-    std::vector<std::string> unNeg = {};
+    std::vector<std::string> UnionApBp = GetUnion(A.pos,B.pos);
+    std::vector<std::string> UnionAnBn = GetUnion(A.neg,B.neg);
 
-    for (std::string A: A.pos) {
-        for (std::string B: B.pos) {
-            unPos.push_back(A);
 
-        }
-    }
+    C.pos = UnionApBp;
+    C.neg = UnionAnBn;
 
-    for (std::string A: A.neg) {
-        for (std::string B: B.neg) {
-                unNeg.push_back(A);
-        }
-    }
 
-    C.pos = unPos;
-    C.neg = unNeg;
-
-    if (!disjoint(C.pos, C.neg)) {
+    std::vector<std::string> IntersectionCpCn = GetIntersection(C.pos,C.neg);
+    if(!IntersectionCpCn.empty()){
         return Clauses();
     }
 
     sort(C.pos.begin(), C.pos.end());
-    C.pos.erase(unique(C.pos.begin(), C.pos.end()), C.pos.end());
-
     sort(C.neg.begin(), C.neg.end());
+
+    C.pos.erase(unique(C.pos.begin(), C.pos.end()), C.pos.end());
     C.neg.erase(unique(C.neg.begin(), C.neg.end()), C.neg.end());
 
 
@@ -272,4 +241,20 @@ void display(std::vector<Clauses> KB){
     for (int i = 0; i < KB.size(); i++){
         std::cout << KB.at(i) <<std::endl;
     }
+}
+
+std::vector<std::string> GetIntersection(std::vector<std::string> A, std::vector<std::string> B){
+    std::vector<std::string> intersection;
+    std::sort(A.begin(),A.end());
+    std::sort(B.begin(),B.end());
+    std::set_intersection(A.begin(),A.end(),B.begin(),B.end(),std::back_inserter(intersection));
+    return intersection;
+}
+
+std::vector<std::string> GetUnion(std::vector<std::string> A, std::vector<std::string> B){
+    std::vector<std::string> intersection;
+    std::sort(A.begin(),A.end());
+    std::sort(B.begin(),B.end());
+    std::set_union(A.begin(),A.end(),B.begin(),B.end(),std::back_inserter(intersection));
+    return intersection;
 }
