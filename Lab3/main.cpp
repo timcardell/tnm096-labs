@@ -25,7 +25,7 @@ struct Clauses {
         return (pos < right.pos && neg < right.neg) ;
     }
 
-    bool isSubset(Clauses c);
+
 
     std::vector<std::string> neg;
     std::vector<std::string> pos;
@@ -51,7 +51,7 @@ int main() {
     Clauses D = Clauses({"movie","ice"}, {});
     Clauses E = Clauses({}, {"movie"});
 
-    std::vector<Clauses> KB = {A,B,C,D,E};
+    std::vector<Clauses> KB = {A,C,D,E};
     KB = Solver(KB);
     std::cout << "Solved: " << std::endl;
     for (Clauses S: KB) {
@@ -126,6 +126,7 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
                     S.push_back(C);
                 }
             }
+
         }
         S = removeDuplicates(S);
 
@@ -138,8 +139,9 @@ std::vector<Clauses> Solver(std::vector<Clauses> KB) {
         std::cout <<std::endl;
 
         //Incorporate S in KB
-        KB = Incorporate(S, KB);
         KB = removeDuplicates(KB);
+        KB = Incorporate(S, KB);
+
 
         std::cout <<"This is KB after incorporate: "<<std::endl;
         display(KB);
@@ -160,19 +162,10 @@ std::vector<Clauses> Incorporate_clause(Clauses A, std::vector<Clauses> KB) {
         AB.pos = GetIntersection(A.pos, it->pos);
         AB.neg = GetIntersection(A.neg, it->neg);
 
-        Clauses BA;
-        BA.pos = GetIntersection(it->pos, A.pos);
-        BA.neg = GetIntersection(it->neg, A.neg);
-
-        size_t orgP = it->pos.size();
-        size_t orgN = it->neg.size();
-        size_t size1 = AB.pos.size();
-        size_t size2 = AB.neg.size();
-
-        if ((AB.pos == A.pos && AB.neg == A.neg) && (size1 < orgP || size2 < orgN)) {
+        if (AB == A) {
             it = KB.erase(it);
         }
-        else if(BA.pos == it->pos && BA.neg == it->neg) {
+        else if(AB.pos == it->pos && AB.neg == it->neg) {
             return KB;
         }
         else {

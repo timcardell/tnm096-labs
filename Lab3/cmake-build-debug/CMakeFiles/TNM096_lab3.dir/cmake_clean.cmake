@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/TNM096_lab3.dir/main.cpp.obj"
-  "TNM096_lab3.exe"
-  "TNM096_lab3.exe.manifest"
-  "TNM096_lab3.lib"
+  "CMakeFiles/TNM096_lab3.dir/main.cpp.o"
+  "TNM096_lab3"
   "TNM096_lab3.pdb"
 )
 
